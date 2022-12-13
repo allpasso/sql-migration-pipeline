@@ -31,7 +31,7 @@ jobs:
 
       - name: Run migrate
         run: |
-          docker run -v $(pwd)/${{ inputs.DIR_SQL_FILES }}:/app/tmp \
+          docker run -v $(pwd)/${{ inputs.DIR_SQL_FILES }}:/app/sql \
           -e ENVIRONMENT=production \
           -e DB_HOST=${{ secrets.DB_HOST }} \
           -e DB_PORT=${{ secrets.DB_PORT }} \
