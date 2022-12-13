@@ -1,0 +1,23 @@
+name: Generate Container
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login Registry Docker
+        run: docker login --username="${{ github.actor }}" --password="${{secrets.GITHUB_TOKEN}}" ghcr.io
+
+      - name: Create tag image
+        run: echo "IMAGE_TAG=ghcr.io/$GITHUB_REPOSITORY:$(git rev-parse --verify --short HEAD)" >> $GITHUB_ENV && echo $GITHUB_ENV
+
+      - name: Dockerbuild
+        run: docker build --tag=$IMAGE_TAG .
+
+      - name: Docker push registry
+        run: docker push $IMAGE_TAG
