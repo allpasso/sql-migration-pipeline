@@ -4,11 +4,10 @@ import (
 	"io/fs"
 	"io/ioutil"
 	"log"
-	"os"
 )
 
 func getPathSql() string {
-	path := os.Getenv("DIR_SQL_FILES")
+	path := "./sql"
 	if path == "" {
 		log.Fatal("DB_HOST not found")
 	}
