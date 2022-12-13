@@ -2,6 +2,10 @@ name: apply-sql
 
 on:
   workflow_call:
+    inputs:
+      DIR_SQL_FILES:
+        required: true
+        type: 'string'
     secrets:
       DB_HOST:
         required: true
@@ -15,12 +19,12 @@ on:
         required: true
 
 jobs:
-  clone_runner_sql:
+  running_container_migrate:
     name: Generate output
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout sql-migration-pipeline
-        uses: actions/checkout@v3
-        with:
-          repository: prosperis/sql-migration-pipeline
-          path: sql-migration-pipeline
+      - name: Login Registry Docker
+        run: docker login --username="${{ github.actor }}" --password="${{secrets.GITHUB_TOKEN}}" ghcr.io
+
+      - name: Run Migrate
+        run: docker pull sql-migration-pipeline:latest
