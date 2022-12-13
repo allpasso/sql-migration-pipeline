@@ -27,4 +27,4 @@ jobs:
         run: docker login --username="${{ github.actor }}" --password="${{secrets.GITHUB_TOKEN}}" ghcr.io
 
       - name: Pull image migrate
-        run: docker pull ghcr.io/prosperis/sql-migration-pipeline
+        run: docker pull ghcr.io/prosperis/sql-migration-pipeline:latest
