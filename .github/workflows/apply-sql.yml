@@ -1,0 +1,26 @@
+name: apply-sql
+
+on:
+  workflow_call:
+    secrets:
+      DB_HOST:
+        required: true
+      DB_PORT:
+        required: true
+      DB_USER:
+        required: true
+      DB_PASS:
+        required: true
+      DB_DATABASE:
+        required: true
+
+jobs:
+  clone_runner_sql:
+    name: Generate output
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sql-migration-pipeline
+        uses: actions/checkout@v3
+        with:
+          repository: prosperis/sql-migration-pipeline
+          path: sql-migration-pipeline
