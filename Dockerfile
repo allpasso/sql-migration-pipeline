@@ -8,13 +8,11 @@ RUN go mod download
 
 RUN go build -o ./exec
 
-FROM alpine
+FROM scratch
 
 WORKDIR /app
 
 COPY --from=builder /app/exec /app/exec
-
-RUN pwd && ls
 
 CMD ["/app/exec"]
 
