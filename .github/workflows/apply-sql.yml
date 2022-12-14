@@ -32,7 +32,7 @@ jobs:
 
       - name: Run migrate
         run: |
-          docker run -v $(pwd)/sql:/app/sql \
+          docker run -v $(pwd)/sql:/sql \
           -e ENVIRONMENT=production \
           -e DB_HOST=${{ secrets.DB_HOST }} \
           -e DB_PORT=${{ secrets.DB_PORT }} \
