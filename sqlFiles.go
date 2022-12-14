@@ -7,11 +7,7 @@ import (
 )
 
 func getPathSql() string {
-	path := "./sql"
-	if path == "" {
-		log.Fatal("DB_HOST not found")
-	}
-	return path
+	return "./sql"
 }
 
 func GetFilesSQL() []fs.FileInfo {

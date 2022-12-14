@@ -6,15 +6,19 @@ COPY . .
 
 RUN go mod download
 
-RUN go build -o ./exec
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ./exec
+
+RUN mkdir sql_empty
 
 FROM scratch
 
-WORKDIR /app
+WORKDIR /
 
-COPY --from=builder /app/exec /app/exec
+COPY --from=builder /app/exec /exec
 
-CMD ["/app/exec"]
+COPY --from=builder /app/sql_empty /sql
+
+CMD ["/exec"]
 
 # docker build -t sql-migration-pipeline .
 
