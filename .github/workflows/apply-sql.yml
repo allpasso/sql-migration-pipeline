@@ -19,6 +19,8 @@ jobs:
     name: Generate output
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+
       - name: Login Registry Docker
         run: docker login --username="${{ github.actor }}" --password="${{secrets.GITHUB_TOKEN}}" ghcr.io
 
