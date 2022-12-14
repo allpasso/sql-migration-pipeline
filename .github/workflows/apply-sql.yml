@@ -27,9 +27,6 @@ jobs:
       - name: Pull image migrate
         run: docker pull ghcr.io/prosperis/sql-migration-pipeline:latest
 
-      - name: teste
-        run: pwd && ls && echo $(pwd)/sql && ls $(pwd)/sql
-
       - name: Run migrate
         run: |
           docker run -v $(pwd)/sql:/sql \
